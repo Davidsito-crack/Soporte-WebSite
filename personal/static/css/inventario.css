@@ -1,0 +1,143 @@
+/* Style para el indice general de toda la pagina */
+html {
+    overflow-y: scroll;
+}
+.soporte-general {
+    text-align: right;
+    color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    z-index: 1000;
+    top: 23px;
+    padding-bottom: 10px;
+    width: 100%;
+    left: 0;
+    background: linear-gradient(to right, #d3d3d3, #ffffff);
+    box-shadow: 0px 2px 2px rgba(37, 37, 37, 0.427);
+}
+.indice {
+    position: fixed;
+    background: linear-gradient(to right, #d3d3d3, #ffffff);
+    z-index: 1000;
+    top: 0px;
+    width: 100%;
+    left: 0px;
+}
+.indice ul{
+    display: flex;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: sticky;
+}
+.indice ul a{
+    margin-right: 45px;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(54, 49, 49);
+}
+.indice a:hover{
+    color: rgb(9, 108, 125);
+    transition: 0.5s;
+}
+.superbody {
+    margin-top: 68px;
+}
+
+/* Style para página de Inventario */
+.inventario {
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: #145873;
+    border: 1px solid #171b1d;
+    font-size: 17px;
+    color: rgb(243, 250, 252);
+}
+.tablita {
+    padding-top: 100px;
+}
+.titulos_inventario {
+    background-color: #094861;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border: 1px solid rgb(243, 250, 252);
+}
+.titulos_inventario th {
+    padding: 8px;
+    border: 1px solid rgb(243, 250, 252);
+}
+.cuadritos_inventario td{
+    border: 1px solid rgb(243, 250, 252);
+    padding: 8px;
+    width: 150px;
+    height: 40px;
+}
+.button-container { 
+    display: flex;
+    position: fixed;
+    width: 100%;
+    padding: 30px 10px 1px;
+    background-color: white;
+}
+.buttons {
+    z-index: -1;
+    top: 0;
+}
+.filter-button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #1c7ea5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.filter-button button {
+    margin-right: 20px;
+}
+.filter-button:hover {
+    background-color: #03ed13;
+    transition: 0.8s;
+}
+.asignado-true {
+    background-color: green;
+}
+.asignado-false {
+    background-color: rgb(242, 242, 242);
+    color: black;
+}
+.hidden {
+    display: none;
+}
+
+#branches-menu {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 60px; /* Ajusta según sea necesario */
+    margin-left: 970px;
+    position: fixed;
+}
+.filter-buttons {
+    width: 100px;
+    font-size: 12px;
+    padding: 10px;
+    background-color: #b2dbff;
+    color: rgb(13, 41, 98);
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.filter-buttons:hover {
+    background-color: #65c1ff;
+    width: 110px;
+    height: auto;
+    font-size: 15px;
+    transition: 0.5s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.gentuza {
+    color: rgb(85, 87, 88);
+}

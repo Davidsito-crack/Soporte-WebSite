@@ -1,0 +1,131 @@
+/* Style para el indice general de toda la pagina */
+html {
+    overflow-y: scroll;
+}
+.soporte-general {
+    text-align: right;
+    color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    z-index: 1000;
+    top: 23px;
+    padding-bottom: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #d3d3d3, #ffffff);
+    box-shadow: 0px 2px 2px rgba(37, 37, 37, 0.427);
+}
+.indice {
+    position: fixed;
+    background: linear-gradient(to right, #d3d3d3, #ffffff);
+    z-index: 1000;
+    top: 0px;
+    width: 100%;
+    left: 0px;
+}
+.indice ul{
+    display: flex;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: sticky;
+}
+.indice ul a{
+    margin-right: 45px;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(54, 49, 49);
+}
+.indice a:hover{
+    color: rgb(9, 108, 125);
+    transition: 0.5s;
+}
+.superbody {
+    margin-top: 68px;
+}
+
+
+/* Style para página de equipos Asignados */
+.information {
+    padding-top: 75px;
+    border-collapse: collapse;
+    width: 98%; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    background-color: #ffffff7d;
+    border: 1px solid #dee0e0;
+    font-size: 15px;
+    margin-top: 130px;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(10, 10, 55);
+    box-shadow: -8px -8px 10px rgba(27, 33, 60, 0.1);
+}
+.background-info {
+    width: 100%;
+    height: 100%;
+}
+.image-barckground-info {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.titulos {
+    background-color: #ffffff76;
+    color: rgb(10, 24, 57);
+    border: 1px solid #dddfdf;
+    font-size: 15px;
+}
+.cuadritos_info td {
+    border: 1px solid #dddfdf;
+    padding: 8px;
+    width: 150px;
+    height: 40px;   
+}
+.cuadritos_info td:first-child {
+    font-size: 15px;
+    padding: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    width: 250px;
+}
+.cuadritos_info tr:hover {
+    background-color: rgb(244, 249, 251);
+    transition: background-color 0.7s, color 0.5s;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

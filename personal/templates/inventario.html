@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/inventario.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/MSC.png' %}">
+</head>
+<body class="superbody">
+    <div class="indice">
+        <ul>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'informacion' %}">Asignados</a>
+            <a href="{% url 'comodatos' %}">Comodatos</a>
+            <a href="{% url 'equipos'%}">Inventario</a>
+            <a href="">Ayuda</a>
+        </ul>
+    </div>
+    <h1 class="soporte-general">Soporte</h1>    
+    <div class="button-container">
+        <button class="filter-button" onclick="filterItems('all')">Todos</button>
+        <button class="filter-button" onclick="filterItems('Laptop')">Laptop</button>
+        <button class="filter-button" onclick="filterItems('Teléfono')">Teléfono</button>
+        <button class="filter-button" onclick="filterItems('Monitor')">Monitor</button>
+        <button class="filter-button" onclick="filterItems('Docking')">Docking</button>
+        <button class="filter-button" onclick="filterItems('Tablet')">Tablet</button>
+        <button class="filter-button" onclick="filterItems('Mini')">Mini PC</button>
+        <button class="filter-button" onclick="filterItems('HandHeld')">HandHeld</button>
+        <button class="filter-button" onclick="filterItems('desktop')">Desktop</button>
+        <button class="filter-button" onclick="showBranchesMenu()">Sucursales</button>
+    </div>
+
+    <div id="branches-menu" class="hidden">
+        <button class="filter-buttons" onclick="filterBranches('Chihuahua')">Chihuahua</button>
+        <button class="filter-buttons" onclick="filterBranches('Juarez')">Juarez</button>
+        <button class="filter-buttons" onclick="filterBranches('Guaymas')">Guaymas</button>
+        <p></p>
+        <button class="filter-buttons" onclick="filterBranches('Monterrey')">Monterrey</button>
+        <button class="filter-buttons" onclick="filterBranches('Tamaulipas')">Tamaulipas</button>
+        <button class="filter-buttons" onclick="filterBranches('Querétaro')">Queretaro</button>
+        <p></p>
+        <button class="filter-buttons" onclick="filterBranches('Mexicali')">Mexicali</button>
+        <button class="filter-buttons" onclick="filterBranches('Silao')">Silao</button>
+        <button class="filter-buttons" onclick="filterBranches('Guanajuato')">Guanajuato</button>
+        <p></p>
+        <button class="filter-buttons" onclick="filterBranches('CDMX')">CDMX</button>
+        <button class="filter-buttons" onclick="filterBranches('Tijuana')">Tijuana</button>
+        <button class="filter-buttons" onclick="filterBranches('Guadalajara')">Guadalajara</button>
+    </div>
+        
+    </div>
+    <div class="tablita">
+        <table class="inventario">
+            <thead class="titulos_inventario">
+                <tr>
+                    <th><strong>Equipo</strong></th>
+                    <th><strong>Marca</strong></th>
+                    <th><strong>Modelo</strong></th>
+                    <th><strong>Serial</strong></th>
+                    <th><strong>Tipo de Almacenamiento</strong></th>
+                    <th><strong>Sucursal</strong></th>
+                    <th><strong>Asignado</strong></th>
+                </tr>
+            </thead>
+            <tbody class="cuadritos_inventario">
+                {% for computadora in computadoras %}
+                    <tr class="item Laptop">
+                        <td> Laptop </td>
+                        <td> {{ computadora.marca }} </td>
+                        <td> {{ computadora.modelo }} </td>
+                        <td> {{ computadora.serial }} </td>
+                        <td> {{ computadora.tipo_almacenamiento }} </td>
+                        <td> {{ computadora.sucursal }} </td>
+                        <td class="{% if computadora.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if computadora.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.laptop == computadora %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No asignado
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            <tr class="separator Laptop"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+
+                {% for phone in phones %}
+                    <tr class="item Teléfono">
+                        <td> Teléfono </td>
+                        <td> {{ phone.marca }} </td>
+                        <td> {{ phone.modelo }} </td>
+                        <td> {{ phone.serial }} </td>
+                        <td> N/A </td>
+                        <td> {{ phone.sucursal }} </td>
+                        <td class="{% if phone.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if phone.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.telefono == phone %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No asignado
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="separator Teléfono"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+
+                {% for pantalla in pantallas %}
+                    <tr class="item Monitor">
+                        <td> Monitor </td>
+                        <td> {{ pantalla.marca }} </td>
+                        <td> {{ pantalla.modelo }} </td>
+                        <td> {{ pantalla.serial }} </td>
+                        <td> N/A </td>
+                        <td> {{ pantalla.sucursal }} </td>
+                        <td class="{% if pantalla.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if pantalla.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.monitor == pantalla %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No asignado
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="separator Monitor"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+                
+                {% for tableta in tabletas %}
+                    <tr class="item Tablet">
+                        <td> Tablet </td>
+                        <td> {{ tableta.marca }} </td>
+                        <td> {{ tableta.modelo }} </td>
+                        <td> {{ tableta.serial }} </td>
+                        <td> N/A </td>
+                        <td> {{ tableta.sucursal }} </td>
+                        <td class="{% if tableta.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if tableta.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.tablet == tableta %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No asignado
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="separator Tablet"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+                
+                {% for little_pc in little_pcs %}
+                    <tr class="item Mini PC">
+                        <td> Mini PC </td>
+                        <td> {{ little_pc.marca }} </td>
+                        <td> {{ little_pc.modelo }} </td>
+                        <td> {{ little_pc.serial }} </td>
+                        <td> N/A </td>
+                        <td> {{ little_pc.sucursal }} </td>
+                        <td class="{% if little_pc.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if little_pc.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.mini_pc == little_pc %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No asignado
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="separator Mini PC"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+
+                {% for dock in docks %}
+                    <tr class="item Docking">
+                        <td> Docking </td>
+                        <td> {{ dock.marca }} </td>
+                        <td> {{ dock.modelo }} </td>
+                        <td> {{ dock.serial }} </td>
+                        <td> N/A </td>
+                        <td> {{ dock.sucursal }} </td>
+                        <td class="{% if dock.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if dock.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.docking == dock %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No asignado
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="separator Docking"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+
+                {% for hh in hhs %}
+                    <tr class="item HandHeld">
+                        <td> HandHeld </td>
+                        <td> {{ hh.marca }} </td>
+                        <td> {{ hh.modelo }} </td>
+                        <td> {{ hh.serial }} </td>
+                        <td> N/A </td>
+                        <td> {{ hh.sucursal }} </td>
+                        <td class="{% if hh.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if hh.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.hand_held == hh %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for gentuza in gentuzas %}
+                                {% if gentuza.hand_held == hh %}
+                                    <span class="gentuza">{{ gentuza.titulo }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="separator HandHeld"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+
+                {% for desktopp in desktopps %}
+                    <tr class="item desktop">
+                        <td> Desktop </td>
+                        <td> {{ desktopp.marca }} </td>
+                        <td> {{ desktopp.modelo }} </td>
+                        <td> {{ desktopp.serial }} </td>
+                        <td> N/A </td>
+                        <td> {{ desktopp.sucursal }} </td>
+                        <td class="{% if desktopp.asignado %}asignado-true{% else %}asignado-false{% endif %}">
+                        {% if desktopp.asignado %}
+                            {% for gente in gentes %}
+                                {% if gente.desktop == desktopp %}
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No asignado
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="separator Desktop"><td colspan="8" style="height: 15px; background-color: white;"></td></tr>
+
+            </tbody>
+        </table>
+    </div>
+    <script src="{% static 'js/inventarios.js' %}"></script>
+</body>
+</html>

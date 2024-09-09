@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignados</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/asignados.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/MSC.png' %}">
+
+    <style>
+        /* Estilos para la tabla */
+        .clickable {
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Cuadro emergente que cubre la primera columna */
+        .expandable-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: none;
+            z-index: 10;
+            width: auto%;
+            height: auto;
+            overflow: hidden;
+            transform: translateX(20%);
+            opacity: 0;
+            transition: transform 0.5s ease-out, opacity 0.4s ease-out;
+        }
+
+        .expandable-info.open {
+            transform: translateX(0);
+            opacity: 1;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: rgb(224, 233, 238);
+        }
+
+        .expandable-info.closing {
+            /* Opcional: podrías añadir estilos para la transición de cierre si es necesario */
+        }
+
+        /* Asegura que la tabla no se vea afectada */
+        table {
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Asegura que los títulos se mantengan visibles */
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 15;
+        }
+
+        /* Fondo de la página */
+        .superbody {
+            background-image: url("{% static 'images/fondo-blanco.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="superbody">
+    <div class="indice">
+        <ul>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'informacion' %}">Asignados</a>
+            <a href="{% url 'comodatos' %}">Comodatos</a>
+            <a href="{% url 'equipos' %}">Inventario</a>
+            <a href="">Ayuda</a>
+        </ul>
+        <h1 class="soporte-general">Soporte</h1>
+    </div>
+
+    <div class="contenido_principal">
+        <div class="menu_principal">
+            <table class="information">
+                <thead class="titulos">
+                    <tr>
+                        <th><strong>PERSONA</strong></th>
+                        <th><strong>LAPTOP</strong></th>
+                        <th><strong>TELÉFONO</strong></th>   
+                        <th><strong>MONITOR</strong></th>
+                        <th><strong>HANDHELD</strong></th>
+                        <th><strong>DESKTOP</strong></th>  
+                        <th><strong>DOCKING</strong></th>  
+                        <th><strong>TABLET</strong></th>  
+                        <th><strong>MINI PC</strong></th>  
+                    </tr>
+                </thead>
+                <tbody class="cuadritos_info">
+                    {% for gente in gentes %}
+                    <tr>
+                        <td class="clickable" data-id="{{ gente.id }}">
+                            {{ gente.nombre }} {{ gente.apellido }}
+                            <div id="info-{{ gente.id }}" class="expandable-info">
+                                <div id="info-content-{{ gente.id }}" class="informeishon">
+                                    <p></p>
+                                    {{ gente.nombre }} {{ gente.apellido }}
+                                    <p></p>
+                                    No. Empleado: {{ gente.numero_de_empleado }}
+                                    <p></p>
+                                    No. teléfono: {{ gente.numero_de_telefono }}
+                                    <p></p>
+                                    {{ gente.correo }}
+                                    <p></p>
+                                    Puesto: {{ gente.puesto }}
+                                    <p></p>
+                                    Sucursal: {{ gente.sucursal }}
+                                </div>
+                            </div>
+                        </td>
+                        <td> 
+                            {% if gente.laptop %}
+                                {{ gente.laptop.marca }} {{ gente.laptop.modelo }}. Serial: {{ gente.laptop.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+                        <td> 
+                            {% if gente.telefono %}
+                                {{ gente.telefono.marca }} {{ gente.telefono.modelo }}. Serial: {{ gente.telefono.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+                        <td> 
+                            {% if gente.monitor %}
+                                {{ gente.monitor.marca }} {{ gente.monitor.modelo }}. Serial: {{ gente.monitor.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+
+
+                        <td> 
+                            {% if gente.hand_held %}
+                                {{ gente.hand_held.marca }} {{ gente.hand_held.modelo }}. Serial: {{ gente.hand_held.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+                        <td> 
+                            {% if gente.desktop %}
+                                {{ gente.desktop.marca }} {{ gente.desktop.modelo }}. Serial: {{ gente.desktop.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+
+
+                        <td> 
+                            {% if gente.docking %}
+                                {{ gente.docking.marca }} {{ gente.docking.modelo }}. Serial: {{ gente.docking.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+                        <td> 
+                            {% if gente.tablet %}
+                                {{ gente.tablet.marca }} {{ gente.tablet.modelo }}. Serial: {{ gente.tablet.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+                        <td> 
+                            {% if gente.mini_pc %}
+                                {{ gente.mini_pc.marca }} {{ gente.mini_pc.modelo }}. Serial: {{ gente.mini_pc.serial }}
+                            {% else %}
+                                
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentlyOpenBox = null;
+
+            function closeBox(box) {
+                if (box) {
+                    box.classList.remove('open');
+                    box.classList.add('closing');
+                    box.addEventListener('transitionend', function handler() {
+                        box.style.display = 'none';
+                        box.classList.remove('closing');
+                        box.removeEventListener('transitionend', handler);
+                    }, { once: true });
+                }
+            }
+
+            function openBox(box) {
+                box.style.display = 'block';
+                requestAnimationFrame(() => {
+                    box.classList.add('open');
+                });
+            }
+
+            function toggleInfo(personId) {
+                const infoBox = document.getElementById('info-' + personId);
+
+                if (currentlyOpenBox && currentlyOpenBox !== infoBox) {
+                    closeBox(currentlyOpenBox);
+                }
+
+                if (infoBox === currentlyOpenBox) {
+                    closeBox(infoBox);
+                    currentlyOpenBox = null;
+                } else {
+                    openBox(infoBox);
+                    currentlyOpenBox = infoBox;
+                }
+            }
+
+            // Abre o cierra el cuadro al hacer clic en el nombre
+            document.querySelectorAll('.clickable').forEach(item => {
+                item.addEventListener('click', function(event) {
+                    const personId = this.getAttribute('data-id');
+                    toggleInfo(personId);
+                    event.stopPropagation(); // Evita que el clic en el nombre cierre el cuadro si ya está abierto
+                });
+            });
+
+            // Cierra el cuadro al hacer clic fuera del cuadro
+            document.addEventListener('click', function (event) {
+                if (currentlyOpenBox && !event.target.closest('.expandable-info') && !event.target.closest('.clickable')) {
+                    closeBox(currentlyOpenBox);
+                    currentlyOpenBox = null;
+                }
+            });
+            
+            // Evita el cierre del cuadro cuando se hace clic dentro de él
+            document.querySelectorAll('.expandable-info').forEach(box => {
+                box.addEventListener('click', function(event) {
+                    event.stopPropagation(); // Evita que el clic dentro del cuadro cierre el cuadro
+                });
+            });
+        });
+    </script>
+</body>
+</html>

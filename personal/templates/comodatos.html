@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comodatos</title>
+    <link rel="stylesheet" href="{% static 'css/comodatos.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/MSC.png' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/comodatos.js' %}" defer></script>
+</head>
+<body class="superbody">
+    <div class="indice">
+        <ul>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'informacion' %}">Asignados</a>
+            <a href="{% url 'comodatos' %}">Comodatos</a>
+            <a href="{% url 'equipos'%}">Inventario</a>
+            <a href="">Ayuda</a>
+        </ul>
+        <h1 class="soporte-general">Soporte</h1>
+    </div>
+    <div class="formulario">
+        <div class="">
+            <h1>Documentación</h1>
+            <div class="botones">
+                <form action="{% url 'upload_document' %}" method="post" enctype="multipart/form-data" id="upload-form">
+                    {% csrf_token %}
+                    <label for="comodatario" class="comodatario">Comodatario:</label>
+                    <select name="comodatario_id" id="comodatario_id" class="nombresito">
+                        {% for persona in personas %}
+                            {% if persona.is_active %}
+                                <option value="{{ persona.id }}">{{ persona.nombre }} {{ persona.apellido }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label for="comodato" class="file-label">Choose File</label>
+                    <input type="file" name="comodato" id="comodato" class="file-input">
+                    <button type="submit" class="subir-doc" onclick="return validarDocumento()">Subir documento</button>
+                </form>
+            </div>
+        </div>
+
+        <h2>Documentos de Comodatarios</h2>
+        {% if personas %}
+            {% for persona in personas %}
+                {% if persona.is_active %}
+                    <div class="person-card" id="person-row-{{ persona.id }}" onclick="rotateCard(this)">
+                        <div class="card-front">
+                            <strong>{{ persona.nombre }}</strong>
+                            <strong>{{ persona.apellido }}</strong>
+                            <p></p>
+                            <strong style="text-decoration: underline; color: #266447;">{{ persona.puesto }}</strong>
+                            {% with documentos=persona.comodatos_set.all %}
+                                {% if documentos %}
+                                    {% for documento in documentos %}
+                                        <p><strong>Fecha de Subida:</strong> {{ documento.fecha_de_subida }}</p>
+                                        {% if documento.comodato %}
+                                            <button class="DESCARGA" onclick="solicitarContrasena('{{ documento.comodato.url }}')">Descargar</button>
+                                        {% else %}
+                                            No hay archivo asociado
+                                        {% endif %}
+                                        </p>
+                                        <form action="{% url 'delete_document' documento.id %}" method="post" id="delete-form-{{ documento.id }}">
+                                            {% csrf_token %}
+                                            <button class="ELIMINAR" type="submit">Eliminar documento</button>
+                                        </form>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No hay documentos asociados.</p>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="card-back">
+                            <img id="employee-image" src="{% static 'images/empleados/'|add:persona.numero_de_empleado|add:'.jpeg' %}" alt="Imagen de {{ persona.nombre }}" class="foto-atras"/>
+                            <img id="backup-image" src="{% static 'images/MSC.png' %}" alt="Imagen de respaldo" style="display:none;" />
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>No se encontraron comodatarios registrados.</p>
+        {% endif %}
+    </div>
+
+    <!-- Contenedor para la animación de carga -->
+    <div id="loading-animation" class="loading-animation" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="{% static 'js/comodatos.js' %}"></script>
+</body>
+</html>

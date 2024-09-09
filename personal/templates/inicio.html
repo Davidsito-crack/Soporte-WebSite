@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/MSC.png' %}" style="border-radius: 8px;">
+    
+    <div class="indice">
+        <ul>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'informacion' %}">Asignados</a>
+            <a href="{% url 'comodatos' %}">Comodatos</a>
+            <a href="{% url 'equipos'%}">Inventario</a>
+            <a href="">Ayuda</a>
+        </ul>
+    </div>
+</head>
+<body class="inicio-body">
+    <div class="image-title">
+        <img src="{% static 'images/empleo.jpg' %}" alt="Imagen" class="titleimg">
+    </div>
+
+    <div class="simbolo">
+        <img src="{% static 'images/MSC.png' %}" alt="Imagen" class="imagen">
+        <div class="contenido-medio">
+            <div class="central-images">
+                <img src="{% static 'images/vm.webp' %}" alt="Otra Imagen" class="imagen-medio">
+                <img src="{% static 'images/inge.jpg' %}" alt="Otra Imagen" class="imagen-medio">
+            </div>
+        </div>
+        <h1 class="soporte-inicio">Soporte</h1>
+    </div>
+    <div>HOLA</div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

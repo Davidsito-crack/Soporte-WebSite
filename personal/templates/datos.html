@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/datos.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/png" href="{% static 'images/MSC.png' %}">
+
+    <div class="indice">
+        <ul>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'informacion' %}">Asignados</a>
+            <a href="{% url 'comodatos' %}">Comodatos</a>
+            <a href="{% url 'equipos'%}">Inventario</a>
+            <a href="">Ayuda</a>
+        </ul>
+    </div>
+    <h1 class="soporte-general">Soporte</h1>
+</head>
+<body class="superbody">
+    
+    <div class="contenedor-centralizado">
+        <div class="datos">
+            <table class="correo">
+                <thead class="titulos_correos">
+                    <tr>
+                        <th><strong>Nombre</strong></th>
+                        <th><strong>Teléfono</strong></th>
+                        <th><strong>Correo</strong></th>
+                        <th><strong>VPN</strong></th>
+                    </tr>
+                </thead>
+                <tbody class="cuadritos_correo">
+                    <!--{% for gente in gentes %}
+                        <tr>
+                            <td class="clickable" data-sucursal="Sucursal: {{ gente.sucursal }}" data-nombre="{{ gente.nombre }} {{ gente.apellido }}">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front">
+                                            {{ gente.nombre }} {{ gente.apellido }}
+                                        </div>
+                                        <div class="back">
+                                            Sucursal: {{ gente.sucursal }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                            {% if gente.numero_de_telefono == null %}
+                            {% else %}
+                                {{ gente.numero_de_telefono }}
+                            {% endif %}
+                            </td>
+                            <td>
+                            {% if gente.correo == null %}
+                            {% else %}
+                                {{ gente.correo }}
+                            {% endif %}
+                            </td>
+                            <td>
+                            {% if gente.VPN == null %}
+                            {% else %}
+                                {{ gente.VPN }}
+                            {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{% static 'js/datos.js' %}"></script>
+</body>
+</html>
